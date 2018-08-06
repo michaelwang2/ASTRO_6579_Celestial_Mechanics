@@ -1,0 +1,33 @@
+function zdot = ClohessyWiltshire(t,z,p)
+% z = [x; y; z; xd; yd; zd]
+
+% parameters
+mu = p.mu;
+a = p.a;
+kJ2 = p.kJ2;
+I = p.I;
+
+% unpack
+x = z(1);
+y = z(2);
+zz = z(3);
+xd = z(4);
+yd = z(5);
+zd = z(6);
+n = sqrt(mu/a^3);
+theta = n*t;
+
+% Clohessy-Wltshire with J2 perturbations
+% zdot = [xd;...
+%     yd;...
+%     zd;... 
+%     (3*(n^2)*x + 2*n*yd - kJ2*(1 - 3*(sin(I)^2)*sin(theta)^2)/a^4);...
+%     (-2*n*xd - kJ2*(sin(I)^2)*sin(2*theta)/a^4);...
+%     (-n^2*zz - kJ2*sin(2*I)*sin(theta)/a^4)];
+zdot = [xd;...
+    yd;...
+    zd;... 
+    (3*(n^2)*x + 2*n*yd);...
+    -2*n*xd;...
+    -n^2*zz];
+end
